@@ -10,8 +10,8 @@
                 @csrf
                 <div class="mb-3">
                     <label for="exampleInputName1" class="form-label">Enter Your Name</label>
-                    <input type="name" name="name" class="form-control @error('Name') is-invalid @enderror" placeholder="Enter your Name">
-                    @error('email')
+                    <input type="name" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter your Name">
+                    @error('name')
                     <strong class="text-danger">{{$message}}</strong>
                     @enderror
                 </div>

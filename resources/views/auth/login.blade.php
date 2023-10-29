@@ -6,7 +6,7 @@
     <div class="card col-md-5 mr-3 mt-5">
         <div class="card-body">
             <h2 class="card-title text-center mb-3">Member login</h2>
-            <form action="{}" method="post">
+            <form action="{{route('login')}}" method="post">
                 @csrf
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -23,6 +23,7 @@
                     @enderror
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
+                <a href="{{ route('forget.password.get') }}">Reset Password</a>
                 {{-- <a href="{{ url('/') }}" class="btn btn-danger">Back</a> --}}
             </form>
         </div>
