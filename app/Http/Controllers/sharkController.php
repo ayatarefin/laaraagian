@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Verified;
 use DB;
 class sharkController extends Controller
 {
@@ -70,7 +71,7 @@ class sharkController extends Controller
         return view('purchase',compact('class'));
     }
 
-    public function resend()
-    {;
-    }
+   public function resend(Request $request)
+{
+}
 }

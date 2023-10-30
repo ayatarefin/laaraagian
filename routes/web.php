@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\ClassController;
+use App\Http\Controllers\sharkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,29 +19,39 @@ use App\Http\Controllers\Admin\ClassController;
 |
 */
 
-Route::get('/email/verify', function () {
-    return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
+//___Login & Logout___//
+
+Route::get('/', function (){
+    return view('home');
+})->name('homelog')->middleware('auth');
+
+Route::get('/home', function (){
+    return view('home');
+});
 
 Route::get('/logout',function(){
     Auth::logout();
     return redirect()->route('login');
 });
 
-Route::post('resent-email',[App\Http\Controllers\sharkController::class,'resend'])->name('verification.resend');
+
+//___verify Account___//
+
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('resent-email',[sharkController::class,'resend'])->name('verification.resend');
 
 Route::get('/email/verify/{id}/{hash}',function(EmailVerificationRequest $request){
     $request->fulfill();
     return redirect('/');
 })->middleware(['auth','signed'])->name('verification.verify');
 
-Route::get('/', function (){
-    return view('home');
-})->name('homelog')->middleware('auth');
+Route::get('/home/purchase', [sharkController::class, 'purchase'])->name('purchase.item')->middleware('verified');
 
-Route::get('/home/purchase', [App\Http\Controllers\sharkController::class, 'purchase'])->name('purchase.item')->middleware('verified');
 
-// reset password
+//___reset password___//
 
 Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');

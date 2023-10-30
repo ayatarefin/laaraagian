@@ -55,7 +55,8 @@ class ClassController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $classes=DB::table('classes')->where('id',$id)->first();
+        return view('admin.classes.edit',compact('classes'));
     }
 
     /**
@@ -63,7 +64,16 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'class_id'=>'required',
+            'name' => 'required',
+        ]);
+        $data=array(
+            'Class_id'=> $request->class_id,
+            'name'=> $request->name,
+        );
+        DB::table('classes')->where('id',$id)->update($data);
+        return redirect()->route('classes.index')->with('success','Succesfully Updated!');
     }
 
     /**

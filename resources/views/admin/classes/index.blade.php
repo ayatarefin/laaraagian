@@ -62,7 +62,7 @@
                                 <td>{{$row->class_id}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-info">Edit</a>
+                                    <a href="{{route('classes.edit',$row->id)}}" class="btn btn-sm btn-info">Edit</a>
                                     <form action="{{route('classes.destroy',$row->id)}}" method="Post">
                                         @csrf
                                         <input type="hidden" name="_method" value="DELETE">
