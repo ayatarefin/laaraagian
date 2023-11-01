@@ -12,7 +12,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students=DB::table('Students')->orderby('student_id','ASC')->get();
+        // $students=DB::table('Students')->join('classes','students.class_id','classes.id')->get(); //basic join
+        $students=DB::table('Students')->join('classes','students.class_id','classes.id')->select('students.name as student_name', 'classes.name as class_name', 'students.*')->paginate(5); //// Alias the 'name' columns
+        // $classes=DB::table('classes')->get();
         return view('admin.students.index',compact('students'));
     }
 

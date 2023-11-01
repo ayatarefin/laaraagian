@@ -51,7 +51,7 @@
                         <thead>
                             <tr>
                                 <td>Serial Number</td>
-                                <td>Class ID</td>
+                                <td>Class Name</td>
                                 <td>Student ID</td>
                                 <td>Name</td>
                                 <td>Phone Number</td>
@@ -62,8 +62,8 @@
                             @foreach ($students as $key => $row)
                             <tr>
                                 <td>{{++$key}}</td>
-                                <td>{{$row->Class_id}}</td>
-                                <td>{{$row->Student_id}}</td>
+                                <td>{{$row->class_name}}</td> <!-- Use the alias for class's name -->
+                                <td>{{$row->student_name}}</td> <!-- Use the alias for student's name -->
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->phone}}</td>
                                 <td>{{$row->email}}</td>
@@ -80,6 +80,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$students->links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>
